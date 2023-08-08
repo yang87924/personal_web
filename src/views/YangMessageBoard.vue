@@ -39,4 +39,9 @@ export default {
 .title {
   font-size: 24px;
 }
+.bb{
+  font-size: @size-16;
+  color: @warning-color;
+  background: @gray-2;
+}
 </style>
