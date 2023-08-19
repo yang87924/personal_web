@@ -1,6 +1,6 @@
 <template>
   <RouterView></RouterView>
-  <p class="ab">aaaa</p>
+
 </template>
 
 <script>
@@ -14,10 +14,11 @@ export default {
 </script>
 
 <style lang="less">
-
+@import './assets/fonts/icon/iconfont.css';
 .ab{
   font-size: @size-16;
   color: @warning-color;
   background: @gray-2;
 }
+
 </style>

@@ -2,8 +2,15 @@ import {createRouter, createWebHistory} from 'vue-router';
 const routes =[
     {
         path:'/',
+        redirect:'/wall',
         name:'index',
-        component:()=>import('../views/YangMessageBoard.vue')
+        component:()=>import('../views/YangMessageBoard.vue'),
+        children:[
+            {
+                path:'wall',
+                component:()=>import('../views/WallMessage.vue')
+            }
+        ]
     }
     
 ]

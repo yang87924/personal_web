@@ -1,20 +1,25 @@
 <template>
-  <div>
-    <p class="title">index</p>
-    <p class="bb">index</p>
+  <div class="wall-index">
+    <top-bar></top-bar>
+    <video src="@/assets/images/qm1.mp4" autoplay="autoplay" muted="nuted" loop="loop" class="bg-video" ></video>
+    <RouterView></RouterView>
+    <FootBar></FootBar>
   </div>
 </template>
 
 <script>
-//import axios from 'axios';
+import topBar from "@/components/TopBar.vue";
+import FootBar from "@/components/FootBar.vue";
 export default {
   data() {
     return {
       aaa: "",
     };
   },
-  componets: {
+  components: {
     //組件
+    topBar,
+    FootBar,
   },
   computed: {},
   created() {
@@ -36,12 +41,14 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.title {
-  font-size: 24px;
-}
-.bb{
-  font-size: @size-16;
-  color: @warning-color;
-  background: @gray-2;
+.wall-index{
+  .bg-video{
+    height:"800";
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1 ;
+    height: 880px;
+  }
 }
 </style>
