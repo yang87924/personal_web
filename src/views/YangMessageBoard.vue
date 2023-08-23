@@ -1,7 +1,7 @@
 <template>
   <div class="wall-index">
     <top-bar></top-bar>
-    <video src="@/assets/images/qm1.mp4" autoplay="autoplay" muted="nuted" loop="loop" class="bg-video" ></video>
+<!--    <video src="@/assets/images/qm1.mp4" autoplay="autoplay" muted="nuted" loop="loop" class="bg-video" ></video>-->
     <RouterView></RouterView>
     <FootBar></FootBar>
   </div>
@@ -43,7 +43,6 @@ export default {
 <style lang="less" scoped>
 .wall-index{
   .bg-video{
-    height:"800";
     position: fixed;
     top: 0;
     left: 0;
