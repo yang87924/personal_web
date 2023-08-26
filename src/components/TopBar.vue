@@ -5,6 +5,7 @@
       <p class="logo-name">yang</p>
     </div>
     <div class="menu">
+      <YangButton nom="csecondary" class="menu-photo">yang</YangButton>
       <YangButton nom="cprimary" class="menu-message">留言牆</YangButton>
       <YangButton nom="csecondary" class="menu-photo">照片牆</YangButton>
     </div>

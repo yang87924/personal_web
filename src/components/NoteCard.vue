@@ -54,7 +54,7 @@ export default {
 </script>
 <style scoped lang="less">
 @font-face {
-  font-family: 'SYWSRSDRY';
+  font-family: 'fa';
   src: url('@/assets/fonts/SYWSRSDRY.ttf');
 }
 .yang-node-card{
@@ -73,7 +73,7 @@ export default {
   }
   .message{
     height: 140px;
-    font-family: SYWSRSDRY;
+    font-family: fa;
     font-size: 15px;
     color: @gray-1;
     cursor: pointer;

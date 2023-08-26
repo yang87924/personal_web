@@ -19,6 +19,7 @@ export default{
 .yang-button{
     text-align: center;
     border:none;
+    cursor: pointer;
 }
 //size
 .max{
@@ -49,9 +50,9 @@ export default{
 
 }
 .secondary{
-    background: @gray-10;
+    background: none;
     color: @gray-1;
-    border: 1ox solid @gray-1;
+    border: 1px solid @gray-1;
 }
 .cprimary{
     background: @primary-color;

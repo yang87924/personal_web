@@ -12,7 +12,9 @@
     <div class="add" :style="{bottom:addBottom+'px'}" @click="changeModal" v-show="!modal">
       <span class="iconfont icon-tianjia"></span>
     </div>
-    <yang-modal :title="title" @cloose="changeModal" :isModal="modal"></yang-modal>
+    <yang-modal :title="title" @cloose="changeModal" :isModal="modal">
+      <NewCard :id="id" @addClose="changeModal"></NewCard>
+    </yang-modal>
   </div>
 </template>
 
@@ -22,10 +24,12 @@ import nodeCard from "@/components/NoteCard.vue";
 import NodeCard from "@/components/NoteCard.vue";
 import {note} from "../../mock/index";
 import YangModal from "@/components/YangModal.vue";
+import NewCard from "@/components/NewCard.vue";
 export default {
   components: {
     NodeCard,
     YangModal,
+    NewCard,
   },
   data() {
     return {
@@ -38,7 +42,7 @@ export default {
       nWidth:0,//卡片模塊寬度
       addBottom:30,//add按鈕距離底部高度
       title:'寫留言',//新建標題
-      modal:true,
+      modal:false,//是否調用彈窗
     };
   },
   methods:{
