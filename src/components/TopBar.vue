@@ -5,9 +5,9 @@
       <p class="logo-name">yang</p>
     </div>
     <div class="menu">
-      <YangButton nom="csecondary" class="menu-photo">yang</YangButton>
-      <YangButton nom="cprimary" class="menu-message">留言牆</YangButton>
-      <YangButton nom="csecondary" class="menu-photo">照片牆</YangButton>
+      <YangButton :nom="id==-2?'cprimary':'csecondary'" class="menu-message" @click="changeWall(0)">yang</YangButton>
+      <YangButton :nom="id==1?'cprimary':'csecondary'" class="menu-message" @click="changeWall(1)">留言牆</YangButton>
+      <YangButton :nom="id==2?'cprimary':'csecondary'" class="menu-photo" @click="changeWall(2)">照片牆</YangButton>
     </div>
     <div class="user">
       <div class="user-head"></div>
@@ -24,6 +24,20 @@ export default {
   components: {
     YangButton,
   },
+  computed:{
+    id(){
+      return this.$route.query.id;
+    }
+  },
+  methods:{
+    //切換
+    changeWall(e){
+      this.$router.push({
+        query:{id:e}
+      })
+    }
+  }
+
 };
 </script>
 
