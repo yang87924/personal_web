@@ -1,7 +1,7 @@
 <template>
   <div class="new-card">
     <div class="card-color">
-      <div class="colors">
+      <div class="colors" v-show="id == 1">
         <p
           class="color-li"
           v-for="(e, index) in cardColor1"
@@ -12,7 +12,28 @@
         ></p>
       </div>
     </div>
-    <div class="card-main" :style="{ background: cardColor[colorSelected] }">
+    <!-- 照片 -->
+    <div class="add-photo" v-if="id == 2">
+      <input
+        type="file"
+        name="file"
+        id="file"
+        nultiple="nultiple"
+        @change="showPhoto"
+      />
+      <div class="add-bt" v-if="url == ''">
+        <span class="iconfont icon-tianjia"></span>
+      </div>
+      <div class="change-bt" v-if="url != ''">
+        <span class="iconfont icon-tianjia"></span>
+      </div>
+      <div class="photo-div"><img :src="url" /></div>
+    </div>
+    <!-- 卡片 -->
+    <div
+      class="card-main"
+      :style="{ background: id == 1 ? cardColor[colorSelected] : cardColor[5] }"
+    >
       <textarea
         placeholder="留言..."
         class="message"
@@ -67,13 +88,14 @@
       <yangButton size="max" nom="secondary" @click="colseModal(0)"
         >取消</yangButton
       >
-      <yangButton size="max" class="submit" @click="apiTest()">確定</yangButton>
+      <yangButton size="max" class="submit" @click="sumit()">確定</yangButton>
     </div>
   </div>
 </template>
 <script>
 import { cardColor, cardColor1, label } from "@/utils/data";
 import yangButton from "./YangButton.vue";
+import { getObjectURL } from "@/utils/YangFunction";
 export default {
   data() {
     return {
@@ -84,6 +106,8 @@ export default {
       labelSelected: 0, //當前選擇標籤
       message: "", //留言訊息
       name: "", //簽名
+      user: this.$store.state.user,
+      url: "",
     };
   },
   props: {
@@ -106,6 +130,35 @@ export default {
     colseModal(data) {
       this.$emit("addClose", data);
     },
+    //提交新增wall
+    sumit() {
+      let name = "匿名";
+      if (this.name) {
+        name = this.name;
+      }
+      let data = {
+        type: this.id,
+        message: this.message,
+        name: name,
+        userId: this.user.id,
+        moment: new Date(),
+        label: this.nowlabel,
+        color: 5,
+        imgurl: "",
+      };
+      console.log(data);
+    },
+    //顯示圖片
+    showPhoto() {
+      const file = document.getElementById("file").files[0];
+      if (file) {
+        let aa = getObjectURL(file);
+        this.url = aa;
+      } else {
+        console.error("No file selected");
+      }
+    },
+
     //街口測試使用
     apiTest() {
       let data = {
@@ -116,7 +169,7 @@ export default {
         moment: new Date(),
         label: 0,
         color: 3,
-        	imgurl: "https.connectu.life",
+        imgurl: "https.connectu.life",
       };
       this.axios.post("http://localhost:3000/insertwall", data).then((res) => {
         console.log(res);
@@ -199,6 +252,61 @@ export default {
     padding-top: 10px;
     font-size: 12px;
     color: @gray-3;
+  }
+  .add-photo {
+    padding-bottom: 20px;
+    position: relative;
+
+    #file {
+      position: absolute;
+      z-index: 10;
+      top: -10px;
+      height: 74px;
+      width: 64px;
+      opacity: 0;
+      cursor: pointer;
+    }
+    .add-bt {
+      width: 64px;
+      height: 64px;
+      margin-bottom: 2px;
+      border: 1px solid @gray-3;
+      border-radius: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+    .icon-tianjia {
+      font-size: 24px;
+    }
+  }
+  .photo-div {
+    max-height: 200px;
+    width: 100%;
+    background: #f0f0f0;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    img {
+      width: 100%;
+    }
+  }
+  .change-bt {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .icon-xiugai {
+      font-size: 12px;
+      color: #fff;
+    }
   }
   .footbt {
     padding: @padding-20;
