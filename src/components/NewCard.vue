@@ -25,7 +25,7 @@
         <span class="iconfont icon-tianjia"></span>
       </div>
       <div class="change-bt" v-if="url != ''">
-        <span class="iconfont icon-tianjia"></span>
+        <span class="iconfont icon-xiugai"></span>
       </div>
       <div class="photo-div"><img :src="url" /></div>
     </div>
@@ -96,6 +96,7 @@
 import { cardColor, cardColor1, label } from "@/utils/data";
 import yangButton from "./YangButton.vue";
 import { getObjectURL } from "@/utils/YangFunction";
+import { insertWallApi } from "@/api/index";
 export default {
   data() {
     return {
@@ -114,6 +115,7 @@ export default {
     id: {
       default: 0,
     },
+    
   },
   components: {
     yangButton,
@@ -142,11 +144,20 @@ export default {
         name: name,
         userId: this.user.id,
         moment: new Date(),
-        label: this.nowlabel,
+        label: this.labelSelected,
         color: 5,
         imgurl: "",
       };
-      console.log(data);
+      //console.log(data);
+      //訊息不是空的並且是在新增wall
+      if (this.message && this.id == 1) {
+        (data.color = this.colorSelected),
+          insertWallApi(data).then(() => {
+            this.message = "";
+            this.$emit("clickbt", data); //告訴wallmeaage
+            this.$message({ type: "success", message: "新增成功" });
+          });
+      }
     },
     //顯示圖片
     showPhoto() {
@@ -304,7 +315,7 @@ export default {
     align-items: center;
     justify-content: center;
     .icon-xiugai {
-      font-size: 12px;
+      font-size: 24px;
       color: #fff;
     }
   }

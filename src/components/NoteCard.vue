@@ -1,5 +1,5 @@
 <template>
-<div class="yang-node-card" :style="{width: width,background:cardColor[card.imgurl]}">
+<div class="yang-node-card" :style="{width: width,background:cardColor[card.color]}">
   <div class="top">
     <p class="time">{{dateOne(card.moment)}}</p>
     <p class="label">{{label[card.type][card.label]}}</p>
@@ -8,8 +8,8 @@
   <div class="foot">
     <div class="foot-left">
       <div class="icon">
-        <span class="iconfont icon-aixin1"></span>
-        <span class="value">{{card.like}}</span>
+        <span class="iconfont icon-aixin1" :class="{islike:card.islike[0].count>0}"></span>
+        <span class="value">{{card.like[0].count}}</span>
       </div>
       <div class="icon">
         <span class="iconfont icon-liuyan"></span>
@@ -112,6 +112,9 @@ export default {
         &:hover{
           color: @like;
         }
+      }
+      .islike{
+        color: @like;
       }
     }
   }

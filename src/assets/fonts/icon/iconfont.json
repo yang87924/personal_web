@@ -1,72 +1,79 @@
 {
-  "id": "3395343",
-  "name": "yike基础版",
+  "id": "4235171",
+  "name": "yang基礎版",
   "font_family": "iconfont",
   "css_prefix_text": "icon-",
   "description": "",
   "glyphs": [
     {
-      "icon_id": "918722",
-      "name": "爱心",
-      "font_class": "aixin1",
-      "unicode": "e663",
-      "unicode_decimal": 58979
-    },
-    {
-      "icon_id": "1304889",
-      "name": "添加",
-      "font_class": "tianjia",
-      "unicode": "e622",
-      "unicode_decimal": 58914
-    },
-    {
-      "icon_id": "1418212",
-      "name": "留言",
-      "font_class": "liuyan",
-      "unicode": "e606",
-      "unicode_decimal": 58886
-    },
-    {
-      "icon_id": "577402",
-      "name": "向右1",
-      "font_class": "xiangyou",
-      "unicode": "e775",
-      "unicode_decimal": 59253
-    },
-    {
-      "icon_id": "577406",
-      "name": "向左1",
-      "font_class": "xiangzuo",
-      "unicode": "e779",
-      "unicode_decimal": 59257
-    },
-    {
-      "icon_id": "9430532",
-      "name": "关  闭",
-      "font_class": "guanbi",
-      "unicode": "e639",
-      "unicode_decimal": 58937
-    },
-    {
-      "icon_id": "250681",
-      "name": "失败报错-",
+      "icon_id": "59346",
+      "name": "error",
       "font_class": "error",
-      "unicode": "e6c6",
-      "unicode_decimal": 59078
+      "unicode": "e62b",
+      "unicode_decimal": 58923
     },
     {
-      "icon_id": "250689",
-      "name": "信息提示-",
+      "icon_id": "1206402",
+      "name": "warning",
       "font_class": "warning",
-      "unicode": "e6ce",
-      "unicode_decimal": 59086
+      "unicode": "e62a",
+      "unicode_decimal": 58922
     },
     {
-      "icon_id": "250695",
-      "name": "成功已解决-",
+      "icon_id": "15162695",
+      "name": "guanbi",
+      "font_class": "guanbi",
+      "unicode": "e615",
+      "unicode_decimal": 58901
+    },
+    {
+      "icon_id": "21009981",
+      "name": "success",
       "font_class": "success",
-      "unicode": "e6d4",
-      "unicode_decimal": 59092
+      "unicode": "e63c",
+      "unicode_decimal": 58940
+    },
+    {
+      "icon_id": "14830351",
+      "name": "xiangyou",
+      "font_class": "xiangyou",
+      "unicode": "e612",
+      "unicode_decimal": 58898
+    },
+    {
+      "icon_id": "14830352",
+      "name": "xiangzuo",
+      "font_class": "xiangzuo",
+      "unicode": "e613",
+      "unicode_decimal": 58899
+    },
+    {
+      "icon_id": "144071",
+      "name": "liuyan",
+      "font_class": "liuyan",
+      "unicode": "e608",
+      "unicode_decimal": 58888
+    },
+    {
+      "icon_id": "6945223",
+      "name": "tianjia",
+      "font_class": "tianjia",
+      "unicode": "e609",
+      "unicode_decimal": 58889
+    },
+    {
+      "icon_id": "23138768",
+      "name": "aixin1",
+      "font_class": "aixin1",
+      "unicode": "e60c",
+      "unicode_decimal": 58892
+    },
+    {
+      "icon_id": "34205698",
+      "name": "xiugai",
+      "font_class": "xiugai",
+      "unicode": "e71f",
+      "unicode_decimal": 59167
     }
   ]
 }
