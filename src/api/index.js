@@ -11,5 +11,7 @@ export const insertFeedbackApi = (data) => fetch.post("/insertfeedback", data);
 export const insertCommentApi = (data) => fetch.post("/insertcomment", data);
 //獲取評論
 export const findCommentPageApi = (data) => fetch.post("/findcommentpage", data);
+//上傳圖片
+export const profileApi = (data) => fetch.post("/profile", data);
 
 

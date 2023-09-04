@@ -35,9 +35,9 @@
       <photo-card
         :photo="e"
         class="photo-card"
-        v-for="(e, index) in photo"
+        v-for="(e, index) in cards"
         :key="index"
-        @click="selectedCard(index)"
+        @toDetail="selectedCard(index)"
       ></photo-card>
     </div>
     <!-- 卡片狀態 -->
@@ -83,7 +83,7 @@
 import { wallType, label, none } from "@/utils/data";
 import nodeCard from "@/components/NoteCard.vue";
 import NodeCard from "@/components/NoteCard.vue";
-import { photo } from "../../mock/index";
+// import { photo } from "../../mock/index";
 import YangModal from "@/components/YangModal.vue";
 import NewCard from "@/components/NewCard.vue";
 import CardDetail from "@/components/CardDetail.vue";
@@ -109,7 +109,6 @@ export default {
       nlabel: -1, //當前對應的標籤
       none,
       cards: [],
-      photo: photo.data,
       photoArr: [], //圖片列表
       nWidth: 0, //卡片模塊寬度
       addBottom: 30, //add按鈕距離底部高度

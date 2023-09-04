@@ -97,6 +97,7 @@ import { cardColor, cardColor1, label } from "@/utils/data";
 import yangButton from "./YangButton.vue";
 import { getObjectURL } from "@/utils/YangFunction";
 import { insertWallApi } from "@/api/index";
+import { profileApi } from "@/api/index";
 export default {
   data() {
     return {
@@ -153,7 +154,7 @@ export default {
         (data.color = this.colorSelected),
           insertWallApi(data).then((res) => {
             //console.log(res);
-            
+
             let cardD = {
               type: this.id,
               message: this.message,
@@ -174,6 +175,8 @@ export default {
             this.message = "";
             this.$message({ type: "success", message: "新增成功" });
           });
+      } else if (this.id == 2 && this.url) {
+        this.updatePhoto(data);
       }
     },
     //顯示圖片
@@ -184,6 +187,42 @@ export default {
         this.url = aa;
       } else {
         console.error("No file selected");
+      }
+    },
+    //圖片提交
+    updatePhoto(data) {
+      let file = document.getElementById("file");
+      if (file.files.length > 0) {
+        let formData = new FormData();
+        formData.append("file", file.files[0]);
+
+        //圖片提交後端
+        profileApi(formData).then((res) => {
+          // console.log(res);
+          data.imgurl = res;
+          insertWallApi(data).then((result) => {
+            //資料存資料庫
+            let cardD = {
+              type: this.id,
+              message: this.message,
+              name: data.name,
+              userId: this.user.id,
+              moment: new Date(),
+              label: this.labelSelected,
+              color: 5,
+              imgurl: res,
+              id: result.message.insertId,
+              islike: [{ count: 0 }],
+              like: [{ count: 0 }],
+              comcount: [{ count: 0 }],
+              report: [{ count: 0 }],
+              revoke: [{ count: 0 }],
+            };
+            this.$emit("clickbt", cardD); //告訴wallmeaage
+            this.message = "";
+            this.$message({ type: "success", message: "新增成功" });
+          });
+        });
       }
     },
 
