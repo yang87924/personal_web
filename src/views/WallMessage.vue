@@ -28,7 +28,7 @@
         class="card-inner"
         :width="'288px'"
         :class="{ cardSelected: index == cardSelected }"
-        @click="selectedCard(index)"
+        @toDetail="selectedCard(index)"
       ></node-card>
     </div>
     <div class="photo" v-show="id == 2">

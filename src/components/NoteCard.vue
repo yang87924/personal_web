@@ -1,84 +1,112 @@
 <template>
-<div class="yang-node-card" :style="{width: width,background:cardColor[card.color]}">
-  <div class="top">
-    <p class="time">{{dateOne(card.moment)}}</p>
-    <p class="label">{{label[card.type][card.label]}}</p>
-  </div>
-  <p class="message">{{card.message}}</p>
-  <div class="foot">
-    <div class="foot-left">
-      <div class="icon">
-        <span class="iconfont icon-aixin1" :class="{islike:card.islike[0].count>0}"></span>
-        <span class="value">{{card.like[0].count}}</span>
-      </div>
-      <div class="icon">
-        <span class="iconfont icon-liuyan"></span>
-        <span class="value">{{card.comment}}</span>
-      </div>
-
+  <div
+    class="yang-node-card"
+    :style="{ width: width, background: cardColor[card.color] }"
+  >
+    <div class="top">
+      <p class="time">{{ dateOne(card.moment) }}</p>
+      <p class="label">{{ label[card.type][card.label] }}</p>
     </div>
-    <div class="name">{{card.name}}</div>
+    <p class="message" @click="toDeail">{{ card.message }}</p>
+    <div class="foot">
+      <div class="foot-left">
+        <div class="icon" @click="clickLike">
+          <span
+            class="iconfont icon-aixin1"
+            :class="{ islike: card.islike[0].count > 0 }"
+          ></span>
+          <span class="value">{{ card.like[0].count }}</span>
+        </div>
+        <div class="icon" v-show="card.comcount[0].count > 0">
+          <span class="iconfont icon-liuyan"></span>
+          <span class="value">{{ card.comcount[0].count }}</span>
+        </div>
+      </div>
+      <div class="name">{{ card.name }}</div>
+    </div>
   </div>
-</div>
 </template>
-<script >
+<script>
 import "@/assets/fonts/font.ttf";
-import { label,cardColor } from "@/utils/data";
-import {dateOne} from "@/utils/YangFunction";
+import { label, cardColor } from "@/utils/data";
+import { dateOne } from "@/utils/YangFunction";
+import { insertFeedbackApi } from "@/api/index";
 export default {
-  data(){
-    return{
+  data() {
+    return {
       label,
       cardColor,
       dateOne,
-    }
+      user:this.$store.state.user,
+    };
   },
-  props:{
-    width:{
-      default:'100%',
+  props: {
+    width: {
+      default: "100%",
     },
-    note:{
+    note: {
       default: {},
-    }
+    },
   },
-  computed:{
-    card(){
+  computed: {
+    card() {
       return this.note;
-    }
+    },
   },
   created() {
-   // console.log(this.card)
-  }
-}
-
+     //console.log(this.card)
+  },
+  methods: {
+    // 顯示詳情
+    toDeail() {
+      this.$emit("toDetail");
+    },
+    //按讚
+    clickLike(){
+      if(this.card.islike[0].count==0){
+        let data={
+          wallId:this.card.id,
+          userId:this.user.id,
+          type:0,//0是喜歡
+          moment:new Date(),
+        }
+        insertFeedbackApi(data).then(()=>{
+          //反饋完成
+          this.card.like[0].count++;
+          this.card.islike[0].count++;
+        })
+      }
+    }
+  },
+};
 </script>
 <style scoped lang="less">
 @font-face {
-  font-family: 'fa';
-  src: url('@/assets/fonts/SYWSRSDRY.ttf');
+  font-family: "fa";
+  src: url("@/assets/fonts/SYWSRSDRY.ttf");
 }
-.yang-node-card{
+.yang-node-card {
   height: 240px;
-  padding: 10px @padding-20 ;
+  padding: 10px @padding-20;
   box-sizing: border-box;
   position: relative;
-  .top{
+  .top {
     display: flex;
     justify-content: space-between;
     padding-bottom: 16px;
-    p{
+    p {
       font-size: @size-12;
       color: @gray-3;
     }
   }
-  .message{
+  .message {
     height: 140px;
     font-family: fa;
     font-size: 15px;
     color: @gray-1;
     cursor: pointer;
   }
-  .foot{
+  .foot {
     display: flex;
     justify-content: space-between;
     position: absolute;
@@ -87,38 +115,38 @@ export default {
     padding: 0 @padding-20;
     box-sizing: border-box;
     width: 100%;
-    .foot-left{
+    .foot-left {
       display: flex;
-      .value{
+      .value {
         font-size: @size-12;
         color: @gray-3;
         line-height: 30px;
         padding-left: @padding-4;
       }
-      .iconfont{
+      .iconfont {
         font-size: @size-16;
         color: @gray-3;
       }
-      .icon{
+      .icon {
         padding-right: @padding-8;
         display: flex;
         line-height: 30px;
         align-content: center;
       }
-      .icon-aixin1{
+      .icon-aixin1 {
         cursor: pointer;
         transition: @tr;
 
-        &:hover{
+        &:hover {
           color: @like;
         }
       }
-      .islike{
+      .islike {
         color: @like;
       }
     }
   }
-  .name{
+  .name {
     font-family: SYWSRSDRY;
     font-size: 17px;
     color: @gray-1;
