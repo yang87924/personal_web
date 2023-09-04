@@ -5,7 +5,7 @@
       <p class="logo-name">yang</p>
     </div>
     <div class="menu">
-      <YangButton :nom="id==-2?'cprimary':'csecondary'" class="menu-message" @click="changeWall(0)">yang</YangButton>
+      <YangButton :nom="id==0?'cprimary':'csecondary'" class="menu-message" @click="changeWall(0)">yang</YangButton>
       <YangButton :nom="id==1?'cprimary':'csecondary'" class="menu-message" @click="changeWall(1)">留言牆</YangButton>
       <YangButton :nom="id==2?'cprimary':'csecondary'" class="menu-photo" @click="changeWall(2)">照片牆</YangButton>
     </div>

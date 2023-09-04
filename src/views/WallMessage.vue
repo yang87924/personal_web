@@ -6,7 +6,7 @@
       <p
         class="label-list"
         :class="{ lbselected: nlabel == -1 }"
-        @click="selectNode(-1)"
+        @click="selectNode(-1)" v-show="id!=0"
       >
         全部
       </p>
@@ -146,6 +146,9 @@ export default {
       this.view = false;
       this.nlabel = -1;
       this.cardSelected = -1;
+      
+        this.refreshPhotoCards();
+      
     },
   },
   methods: {
@@ -154,6 +157,12 @@ export default {
       this.cards = [];
       this.page = 1;
       this.getWallCard(this.id);
+    },
+    refreshPhotoCards() {
+      this.cards = []; // 清除現有的卡片數據
+      this.photoArr = []; // 清除現有的照片數組
+      this.page = 1; // 重置加載更多數據的頁數
+      this.getWallCard(this.id); // 加載新的照片卡片數據
     },
     //note的寬度
     noteWidth() {
@@ -264,17 +273,16 @@ export default {
             this.page++;
           } else {
             this.page = 0;
-            
           }
           if (this.cards.length > 0) {
-              this.isOK = 1;
-              if(this.page==0){
-                this.isOK=2;
-              }
-            } else {
-              this.isOK = 0;
+            this.isOK = 1;
+            if (this.page == 0) {
+              this.isOK = 2;
             }
-          
+          } else {
+            this.isOK = 0;
+          }
+
           //如果為圖片將圖片單獨拿出來
           if (this.id == 2) {
             for (let i = 0; i < this.cards.length; i++) {
