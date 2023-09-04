@@ -64,4 +64,8 @@ export default{
     color: @gray-1;
 
 }
+.notwallowed{
+    opacity: 0.6;//透明度
+    cursor: not-allowed;//不可典籍
+}
 </style>

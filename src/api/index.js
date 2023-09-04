@@ -7,3 +7,9 @@ export const insertWallApi = (data) => fetch.post("/insertwall", data);
 export const findWallPageApi = (data) => fetch.post("/findwallpage", data);
 //反饋
 export const insertFeedbackApi = (data) => fetch.post("/insertfeedback", data);
+//評論
+export const insertCommentApi = (data) => fetch.post("/insertcomment", data);
+//獲取評論
+export const findCommentPageApi = (data) => fetch.post("/findcommentpage", data);
+
+
