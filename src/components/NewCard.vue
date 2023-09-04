@@ -115,7 +115,6 @@ export default {
     id: {
       default: 0,
     },
-    
   },
   components: {
     yangButton,
@@ -152,9 +151,27 @@ export default {
       //訊息不是空的並且是在新增wall
       if (this.message && this.id == 1) {
         (data.color = this.colorSelected),
-          insertWallApi(data).then(() => {
+          insertWallApi(data).then((res) => {
+            //console.log(res);
+            
+            let cardD = {
+              type: this.id,
+              message: this.message,
+              name: name,
+              userId: this.user.id,
+              moment: new Date(),
+              label: this.labelSelected,
+              color: this.colorSelected,
+              imgurl: "",
+              id: res.message.insertId,
+              islike: [{ count: 0 }],
+              like: [{ count: 0 }],
+              comcount: [{ count: 0 }],
+              report: [{ count: 0 }],
+              revoke: [{ count: 0 }],
+            };
+            this.$emit("clickbt", cardD); //告訴wallmeaage
             this.message = "";
-            this.$emit("clickbt", data); //告訴wallmeaage
             this.$message({ type: "success", message: "新增成功" });
           });
       }

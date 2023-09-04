@@ -49,7 +49,7 @@
       <div id="lottile"></div>
       <p>加載中...</p>
     </div>
-    <p class="bottom-tip" v-show="page == 0">沒有更多...</p>
+    <p class="bottom-tip" v-show="isOK == 2">沒有更多...</p>
     <div
       class="add"
       :style="{ bottom: addBottom + 'px' }"
@@ -120,7 +120,7 @@ export default {
       isOK: 2, //是否加載中，-1為加載狀態，0為沒拿到資料
       //  user: this.$store.state.user,
       page: 1,
-      pagesize: 10,
+      pagesize: 8,
     };
   },
   computed: {
@@ -175,6 +175,11 @@ export default {
       } else {
         this.addBottom = 30;
       }
+
+      //加載更多
+      if (scrollTop + clientHeight == scrollHeight) {
+        this.getWallCard(this.id);
+      }
     },
     //新增卡片
     addCard() {
@@ -221,7 +226,9 @@ export default {
     },
     //前端插入卡片
     newCard(e) {
-      console.log(e);
+      //console.log(e);
+      this.cards.unshift(e);
+      this.closeModal();
     },
     //加載動畫
     loading() {
@@ -243,7 +250,7 @@ export default {
         this.isOK = -1;
         let data = {
           type: id,
-          page: 1,
+          page: this.page,
           pagesize: this.pagesize,
           userId: this.user.id,
           label: this.nlabel,
@@ -251,20 +258,24 @@ export default {
         //console.log(data);
         findWallPageApi(data).then((res) => {
           this.cards = this.cards.concat(res.message);
+          //console.log(this.cards[0])
           //設置下一次的page
           //console.log(res.message);
           if (res.message.length) {
             this.page++;
           } else {
             this.page = 0;
+            
           }
-          setTimeout(() => {
-            if (this.cards.length > 0) {
+          if (this.cards.length > 0) {
               this.isOK = 1;
+              if(this.page==0){
+                this.isOK=2;
+              }
             } else {
               this.isOK = 0;
             }
-          }, 10);
+          
           //如果為圖片將圖片單獨拿出來
           if (this.id == 2) {
             for (let i = 0; i < this.cards.length; i++) {
@@ -292,16 +303,16 @@ export default {
     //this.getPhoto();
     this.loading();
     this.getUser();
-    //監聽螢幕寬度
+    // 监听螢幕寬度
     window.addEventListener("resize", this.noteWidth);
-    //監聽捲動高度變化
+    // 监听捲動高度变化
     window.addEventListener("scroll", this.scrollBottpm);
   },
   unmounted() {
-    //監聽螢幕寬度
-    window.addEventListener("resize", this.noteWidth);
-    //監聽捲動高度變化
-    window.addEventListener("scroll", this.scrollBottpm);
+    // 移除监听螢幕寬度
+    window.removeEventListener("resize", this.noteWidth);
+    // 移除监听捲動高度变化
+    window.removeEventListener("scroll", this.scrollBottpm);
   },
 };
 </script>
