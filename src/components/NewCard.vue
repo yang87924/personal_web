@@ -238,9 +238,11 @@ export default {
         color: 3,
         imgurl: "https.connectu.life",
       };
-      this.axios.post("http://localhost:3000/insertwall", data).then((res) => {
-        console.log(res);
-      });
+      this.axios
+        .post("http://yangyang.myang.pp.ua/api/insertwall", data)
+        .then((res) => {
+          console.log(res);
+        });
     },
   },
 };
